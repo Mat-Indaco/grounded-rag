@@ -1,0 +1,12 @@
+# Dev: levanta el backend FastAPI. La base es Supabase (gestionada), así que acá
+# solo corre la API. El frontend se corre aparte con `npm run dev`.
+services:
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./apps/api:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload

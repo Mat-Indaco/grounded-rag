@@ -1,0 +1,5 @@
+{"id": 1, "question": "¿Qué operador usa pgvector para la distancia coseno?", "expected_answer": "El operador <=>", "relevant_doc": "supabase_pgvector", "must_refuse": false}
+{"id": 2, "question": "¿En qué ruta sirve FastAPI la documentación Swagger UI?", "expected_answer": "/docs", "relevant_doc": "fastapi_basics", "must_refuse": false}
+{"id": 3, "question": "¿Qué directiva marca un componente como Client Component en Next.js?", "expected_answer": "\"use client\"", "relevant_doc": "nextjs_app_router", "must_refuse": false}
+{"id": 4, "question": "¿Cuál es la altura del Aconcagua?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 5, "question": "¿Qué índice de pgvector conviene cuando el corpus crece: ivfflat o hnsw?", "expected_answer": "hnsw", "relevant_doc": "supabase_pgvector", "must_refuse": false}

@@ -1,0 +1,22 @@
+# Render blueprint — backend FastAPI.
+# Importás el repo en Render y esto crea el web service desde el Dockerfile.
+# Las 5 env vars van marcadas sync:false → las cargás a mano en el dashboard (son secretas).
+services:
+  - type: web
+    name: grounded-rag-api
+    runtime: docker
+    dockerfilePath: ./apps/api/Dockerfile
+    dockerContext: ./apps/api
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: VOYAGE_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false # poné acá la URL de Vercel, ej: https://grounded-rag.vercel.app

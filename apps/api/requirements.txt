@@ -1,0 +1,11 @@
+# Pisos mínimos; pip trae la última compatible.
+# La salida estructurada (output_config.format) necesita un SDK de Anthropic reciente,
+# por eso conviene no fijar una versión vieja. Congelá con `pip freeze` cuando ande.
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.9
+pydantic-settings>=2.5
+anthropic>=0.69
+voyageai>=0.3
+supabase>=2.9
+python-multipart>=0.0.9

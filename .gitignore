@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+out/
+dist/
+
+# Env
+.env
+.env.local
+.env*.local
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Evals output (versionamos resultados a mano, no basura)
+evals/results/*.tmp
