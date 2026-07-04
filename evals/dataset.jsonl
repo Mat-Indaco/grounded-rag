@@ -1,0 +1,40 @@
+{"id": 1, "question": "Which decorator do you use to define a GET endpoint in FastAPI?", "expected_answer": "@app.get()", "relevant_doc": "fastapi-first-steps", "must_refuse": false}
+{"id": 2, "question": "At what path does FastAPI serve the interactive Swagger UI documentation?", "expected_answer": "/docs", "relevant_doc": "fastapi-first-steps", "must_refuse": false}
+{"id": 3, "question": "What class do you instantiate to create the main FastAPI application object?", "expected_answer": "FastAPI", "relevant_doc": "fastapi-first-steps", "must_refuse": false}
+{"id": 4, "question": "How do you declare the type of a path parameter in FastAPI so it gets validated and converted?", "expected_answer": "With a standard Python type annotation, e.g. item_id: int", "relevant_doc": "fastapi-path-params", "must_refuse": false}
+{"id": 5, "question": "What happens in FastAPI when a path parameter declared as int receives a non-integer value?", "expected_answer": "It returns an HTTP validation error (422)", "relevant_doc": "fastapi-path-params", "must_refuse": false}
+{"id": 6, "question": "Why does the order of path operations matter when one path is fixed and another is a variable?", "expected_answer": "Paths are matched in order, so the fixed path must be declared before the variable one", "relevant_doc": "fastapi-path-params", "must_refuse": false}
+{"id": 7, "question": "In FastAPI, how is a function parameter treated if it is not declared in the path?", "expected_answer": "As a query parameter", "relevant_doc": "fastapi-query-params", "must_refuse": false}
+{"id": 8, "question": "How do you make a query parameter optional in FastAPI?", "expected_answer": "Give it a default value (e.g. None)", "relevant_doc": "fastapi-query-params", "must_refuse": false}
+{"id": 9, "question": "What library does FastAPI use to declare and validate request bodies?", "expected_answer": "Pydantic", "relevant_doc": "fastapi-body", "must_refuse": false}
+{"id": 10, "question": "How do you declare a request body in FastAPI?", "expected_answer": "Define a class that inherits from Pydantic's BaseModel and use it as a parameter type", "relevant_doc": "fastapi-body", "must_refuse": false}
+{"id": 11, "question": "Which parameter lets you declare the type used for the response in a FastAPI path operation?", "expected_answer": "response_model", "relevant_doc": "fastapi-response-model", "must_refuse": false}
+{"id": 12, "question": "How can you exclude fields that have default values from a FastAPI response?", "expected_answer": "response_model_exclude_unset=True", "relevant_doc": "fastapi-response-model", "must_refuse": false}
+{"id": 13, "question": "How do you return an HTTP error response to the client in FastAPI?", "expected_answer": "Raise an HTTPException", "relevant_doc": "fastapi-handling-errors", "must_refuse": false}
+{"id": 14, "question": "Do you return or raise an HTTPException in FastAPI?", "expected_answer": "You raise it", "relevant_doc": "fastapi-handling-errors", "must_refuse": false}
+{"id": 15, "question": "How do you add custom headers to an HTTP error in FastAPI?", "expected_answer": "Pass a headers argument to HTTPException", "relevant_doc": "fastapi-handling-errors", "must_refuse": false}
+{"id": 16, "question": "What SQL statement enables the pgvector extension in Supabase?", "expected_answer": "create extension vector", "relevant_doc": "supabase-vector-columns", "must_refuse": false}
+{"id": 17, "question": "How do you specify the number of dimensions of a vector column in Postgres?", "expected_answer": "In parentheses after vector, e.g. vector(384)", "relevant_doc": "supabase-vector-columns", "must_refuse": false}
+{"id": 18, "question": "What does semantic search use to compare a query with stored documents?", "expected_answer": "Vector embeddings and their similarity", "relevant_doc": "supabase-semantic-search", "must_refuse": false}
+{"id": 19, "question": "What kind of Supabase feature is recommended to generate embeddings?", "expected_answer": "Edge Functions", "relevant_doc": "supabase-embeddings", "must_refuse": false}
+{"id": 20, "question": "Name an open-source embedding model mentioned for generating embeddings in Supabase.", "expected_answer": "gte-small", "relevant_doc": "supabase-embeddings", "must_refuse": false}
+{"id": 21, "question": "What are Postgres database functions also commonly referred to as?", "expected_answer": "Stored procedures", "relevant_doc": "supabase-functions", "must_refuse": false}
+{"id": 22, "question": "What is the difference between SECURITY INVOKER and SECURITY DEFINER in a Postgres function?", "expected_answer": "INVOKER runs with the caller's permissions; DEFINER runs with the creator's permissions", "relevant_doc": "supabase-functions", "must_refuse": false}
+{"id": 23, "question": "How do you call a Postgres database function from the Supabase client?", "expected_answer": "Using rpc()", "relevant_doc": "supabase-functions", "must_refuse": false}
+{"id": 24, "question": "What Postgres feature does Supabase use to restrict access to rows on a per-user basis?", "expected_answer": "Row Level Security (RLS) policies", "relevant_doc": "supabase-rls", "must_refuse": false}
+{"id": 25, "question": "Which clause of an RLS policy defines which existing rows it applies to for SELECT or UPDATE?", "expected_answer": "The USING clause", "relevant_doc": "supabase-rls", "must_refuse": false}
+{"id": 26, "question": "Which clause of an RLS policy checks new rows being inserted or updated?", "expected_answer": "The WITH CHECK clause", "relevant_doc": "supabase-rls", "must_refuse": false}
+{"id": 27, "question": "What two build parameters does an HNSW index in pgvector accept?", "expected_answer": "m and ef_construction", "relevant_doc": "supabase-indexes-hnsw", "must_refuse": false}
+{"id": 28, "question": "For what kind of workload is an HNSW index best suited?", "expected_answer": "High accuracy, read-heavy, performance-critical workloads", "relevant_doc": "supabase-indexes-hnsw", "must_refuse": false}
+{"id": 29, "question": "What parameter controls the number of lists in an IVFFlat index?", "expected_answer": "lists", "relevant_doc": "supabase-indexes-ivfflat", "must_refuse": false}
+{"id": 30, "question": "Why should an IVFFlat index be created only after the table already contains data?", "expected_answer": "It needs existing data to build its cluster centroids", "relevant_doc": "supabase-indexes-ivfflat", "must_refuse": false}
+{"id": 31, "question": "In FastAPI, what type can you use to restrict a path parameter to a fixed set of values?", "expected_answer": "An Enum", "relevant_doc": "fastapi-path-params", "must_refuse": false}
+{"id": 32, "question": "What alternative documentation UI does FastAPI provide besides Swagger UI?", "expected_answer": "ReDoc, at /redoc", "relevant_doc": "fastapi-first-steps", "must_refuse": false}
+{"id": 33, "question": "In a semantic search SQL function over pgvector, what is typically used to keep only sufficiently similar matches?", "expected_answer": "A similarity threshold", "relevant_doc": "supabase-semantic-search", "must_refuse": false}
+{"id": 34, "question": "What is the capital of Australia?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 35, "question": "Who wrote the novel 'One Hundred Years of Solitude'?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 36, "question": "How does React's useEffect hook work?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 37, "question": "What is the boiling point of water at sea level in Celsius?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 38, "question": "What is the syntax for a for loop in Rust?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 39, "question": "Who is the current president of Argentina?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}
+{"id": 40, "question": "What is the tallest mountain on Earth?", "expected_answer": null, "relevant_doc": null, "must_refuse": true}

@@ -4,7 +4,7 @@
 > Es lo que un senior abre primero. **Si hay que recortar por tiempo, se recortan features
 > del chat, nunca los evals.**
 
-**Estado:** scaffolding. La implementación completa es la **Fase 3**.
+**Estado:** implementado. Corré la suite con `python evals/run_evals.py` (desde la raíz del repo).
 
 ## Qué se va a medir (3 métricas)
 
@@ -27,12 +27,19 @@ Una línea por caso. Ver [`dataset.example.jsonl`](./dataset.example.jsonl):
 Los casos con `must_refuse: true` son preguntas **fuera de dominio** a propósito: miden si el
 sistema sabe decir "no sé".
 
-## Archivos (a implementar en Fase 3)
+## Archivos
 
-- `dataset.jsonl` — 30–50 casos con respuesta conocida (incluye fuera de dominio).
-- `run_evals.py` — corre la suite contra la API y escribe resultados.
-- `metrics.py` — hit rate, groundedness (juez LLM), refusal accuracy.
-- `results/` — históricos por corrida, para mostrar la tabla "antes vs después".
+- `dataset.jsonl` — 40 casos con respuesta conocida (33 de dominio + 7 fuera de dominio).
+- `run_evals.py` — importa el pipeline (retrieve + generate) directo, corre la suite y escribe resultados. Flags: `--limit N`, `--delay S` (throttle para el free tier de Voyage).
+- `metrics.py` — hit rate, groundedness, refusal accuracy.
+- `judge.py` — juez de groundedness (LLM-as-judge con `claude-haiku-4-5`, salida estructurada).
+- `results/` — un JSON por corrida (config + métricas + detalle por caso), para la tabla "antes vs después".
+
+```bash
+python evals/run_evals.py               # corrida completa
+python evals/run_evals.py --limit 5      # smoke test
+python evals/run_evals.py --delay 22     # si Voyage te limita (free tier 3 RPM)
+```
 
 ## El experimento que vende
 
