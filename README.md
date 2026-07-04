@@ -7,7 +7,7 @@ verificables, guardrails contra alucinaciones y una suite de evaluación medible
 No es "chateá con tu PDF": es una demo de que sé *medir y controlar* el comportamiento
 de un LLM. El diferenciador no es el chat, es la carpeta [`/evals`](./evals).
 
-🔗 **Demo:** _(pendiente — Fase 1)_ · 🎥 **Video 60s:** _(pendiente)_
+🔗 **Demo:** https://grounded-rag-cyan.vercel.app · 🎥 **Video 60s:** _(pendiente)_
 
 ## Stack
 
@@ -40,7 +40,7 @@ grounded-rag/
 
 ## Roadmap
 
-- [x] **Fase 1 — MVP.** Ingest + query + chat con citas. _(en curso)_
+- [x] **Fase 1 — MVP.** Ingest + query + chat con citas. **Deployado y público** (Vercel + Render). ✅
 - [ ] **Fase 2 — Guardrails.** Umbral de "no sé" + validación de salida + juez de groundedness.
 - [ ] **Fase 3 — Evals.** Dataset de 30–50 casos + 3 métricas (hit rate, groundedness, refusal accuracy).
 - [ ] **Fase 4 — Dashboard + observabilidad.** Página `/evals` + costo/latencia por consulta.
