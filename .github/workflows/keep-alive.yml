@@ -1,0 +1,16 @@
+name: keep-alive
+
+# Mantiene despierto el backend de Render (plan free duerme a los 15 min de inactividad).
+# Le pega a /health cada 10 min. workflow_dispatch permite dispararlo a mano.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health
+        run: |
+          curl -sSf --max-time 90 https://grounded-rag-api.onrender.com/health
