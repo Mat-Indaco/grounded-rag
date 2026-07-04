@@ -23,3 +23,6 @@ dist/
 
 # Evals output (versionamos resultados a mano, no basura)
 evals/results/*.tmp
+
+# Corpus: markdown crudo descargado (se regenera con fetch.sh)
+apps/api/corpus/_raw/

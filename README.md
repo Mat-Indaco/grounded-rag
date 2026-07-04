@@ -70,10 +70,12 @@ pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
-Ingestá el corpus de ejemplo:
+Ingestá el corpus (13 docs reales de FastAPI + Supabase; ver [`corpus/`](./apps/api/corpus/README.md)):
 
 ```bash
-python scripts/ingest_docs.py ./sample_docs
+python scripts/ingest_docs.py ./corpus/docs
+# Voyage free tier sin método de pago = 3 RPM. Si te limita, agregá delay:
+# python scripts/ingest_docs.py ./corpus/docs 22
 ```
 
 ### 4. Frontend
