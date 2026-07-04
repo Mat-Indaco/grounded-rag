@@ -5,45 +5,41 @@ Copy that to a file `main.py`.
 
 Run the live server:
 
-<div class="termy">
-
 ```console
-$ <font color="#4E9A06">fastapi</font> dev
+$ fastapi dev
 
-  <span style="background-color:#009485"><font color="#D3D7CF"> FastAPI </font></span>  Starting development server 🚀
+   FastAPI   Starting development server 🚀
 
              Searching for package file structure from directories
-             with <font color="#3465A4">__init__.py</font> files
-             Importing from <font color="#75507B">/home/user/code/</font><font color="#AD7FA8">awesomeapp</font>
+             with __init__.py files
+             Importing from /home/user/code/awesomeapp
 
-   <span style="background-color:#007166"><font color="#D3D7CF"> module </font></span>  🐍 main.py
+    module   🐍 main.py
 
-     <span style="background-color:#007166"><font color="#D3D7CF"> code </font></span>  Importing the FastAPI app object from the module with
+      code   Importing the FastAPI app object from the module with
              the following code:
 
-             <u style="text-decoration-style:solid">from </u><u style="text-decoration-style:solid"><b>main</b></u><u style="text-decoration-style:solid"> import </u><u style="text-decoration-style:solid"><b>app</b></u>
+             from main import app
 
-      <span style="background-color:#007166"><font color="#D3D7CF"> app </font></span>  Using import string: <font color="#3465A4">main:app</font>
+       app   Using import string: main:app
 
-   <span style="background-color:#007166"><font color="#D3D7CF"> server </font></span>  Server started at <font color="#729FCF"><u style="text-decoration-style:solid">http://127.0.0.1:8000</u></font>
-   <span style="background-color:#007166"><font color="#D3D7CF"> server </font></span>  Documentation at <font color="#729FCF"><u style="text-decoration-style:solid">http://127.0.0.1:8000/docs</u></font>
+    server   Server started at http://127.0.0.1:8000
+    server   Documentation at http://127.0.0.1:8000/docs
 
-      <span style="background-color:#007166"><font color="#D3D7CF"> tip </font></span>  Running in development mode, for production use:
-             <b>fastapi run</b>
+       tip   Running in development mode, for production use:
+             fastapi run
 
              Logs:
 
-     <span style="background-color:#007166"><font color="#D3D7CF"> INFO </font></span>  Will watch for changes in these directories:
-             <b>[</b><font color="#4E9A06">&apos;/home/user/code/awesomeapp&apos;</font><b>]</b>
-     <span style="background-color:#007166"><font color="#D3D7CF"> INFO </font></span>  Uvicorn running on <font color="#729FCF"><u style="text-decoration-style:solid">http://127.0.0.1:8000</u></font> <b>(</b>Press CTRL+C
-             to quit<b>)</b>
-     <span style="background-color:#007166"><font color="#D3D7CF"> INFO </font></span>  Started reloader process <b>[</b><font color="#34E2E2"><b>383138</b></font><b>]</b> using WatchFiles
-     <span style="background-color:#007166"><font color="#D3D7CF"> INFO </font></span>  Started server process <b>[</b><font color="#34E2E2"><b>383153</b></font><b>]</b>
-     <span style="background-color:#007166"><font color="#D3D7CF"> INFO </font></span>  Waiting for application startup.
-     <span style="background-color:#007166"><font color="#D3D7CF"> INFO </font></span>  Application startup complete.
+      INFO   Will watch for changes in these directories:
+             [&apos;/home/user/code/awesomeapp&apos;]
+      INFO   Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C
+             to quit)
+      INFO   Started reloader process [383138] using WatchFiles
+      INFO   Started server process [383153]
+      INFO   Waiting for application startup.
+      INFO   Application startup complete.
 ```
-
-</div>
 
 In the output, there's a line with something like:
 
@@ -197,8 +193,6 @@ Additionally, other tools might not be able to find it, for example the [VS Code
 
 You can optionally deploy your FastAPI app to [FastAPI Cloud](https://fastapicloud.com) with a single command. 🚀
 
-<div class="termy">
-
 ```console
 $ fastapi deploy
 
@@ -208,8 +202,6 @@ Deploying to FastAPI Cloud...
 
 🐔 Ready the chicken! Your app is ready at https://myapp.fastapicloud.dev
 ```
-
-</div>
 
 The CLI will automatically detect your FastAPI application and deploy it to the cloud. If you are not logged in, your browser will open to complete the authentication process.
 
@@ -290,7 +282,7 @@ We are going to call them "**operations**" too.
 The `@app.get("/")` tells **FastAPI** that the function right below is in charge of handling requests that go to:
 
 * the path `/`
-* using a <code>get</code> operation
+* using a get operation
 
 That `@something` syntax in Python is called a "decorator".
 

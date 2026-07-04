@@ -52,6 +52,10 @@ def clean(text: str) -> tuple[str, str | None]:
     text = re.sub(r"<[A-Z][A-Za-z0-9.]*\b[^>]*?/?>", "", text, flags=re.S)
     text = re.sub(r"</[A-Z][A-Za-z0-9.]*>", "", text)
 
+    # HTML en minúscula (div, iframe, img, br, span...) preservando autolinks <http...>
+    # (el patrón exige `>` inmediato o un espacio tras el nombre; `<https://x>` no matchea).
+    text = re.sub(r"</?[a-z][a-z0-9]*(?:\s[^>]*?)?>", "", text, flags=re.S)
+
     # Tags HTML inline sueltos
     text = re.sub(r"</?(?:dfn|abbr)\b[^>]*>", "", text)
 

@@ -132,11 +132,7 @@ This way, you can get the best of both worlds: type annotations with **tooling s
 
 When you see the automatic docs, you can check that the input model and output model will both have their own JSON Schema:
 
-<img src="/img/tutorial/response-model/image01.png">
-
 And both models will be used for the interactive API documentation:
-
-<img src="/img/tutorial/response-model/image02.png">
 
 ## Other Return Type Annotations
 

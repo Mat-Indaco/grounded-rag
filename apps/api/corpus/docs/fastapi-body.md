@@ -66,21 +66,13 @@ With just that Python type declaration, **FastAPI** will:
 
 The JSON Schemas of your models will be part of your OpenAPI generated schema, and will be shown in the interactive API docs:
 
-<img src="/img/tutorial/body/image01.png">
-
 And will also be used in the API docs inside each *path operation* that needs them:
-
-<img src="/img/tutorial/body/image02.png">
 
 ## Editor support
 
 In your editor, inside your function you will get type hints and completion everywhere (this wouldn't happen if you received a `dict` instead of a Pydantic model):
 
-<img src="/img/tutorial/body/image03.png">
-
 You also get error checks for incorrect type operations:
-
-<img src="/img/tutorial/body/image04.png">
 
 This is not by chance, the whole framework was built around that design.
 
@@ -91,8 +83,6 @@ There were even some changes to Pydantic itself to support this.
 The previous screenshots were taken with [Visual Studio Code](https://code.visualstudio.com).
 
 But you would get the same editor support with [PyCharm](https://www.jetbrains.com/pycharm/) and most of the other Python editors:
-
-<img src="/img/tutorial/body/image05.png">
 
 If you use [PyCharm](https://www.jetbrains.com/pycharm/) as your editor, you can use the [Pydantic PyCharm Plugin](https://github.com/koxudaxi/pydantic-pycharm-plugin/).
 

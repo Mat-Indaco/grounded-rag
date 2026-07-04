@@ -1,0 +1,636 @@
+{
+  "timestamp": "20260704T195830Z",
+  "elapsed_seconds": 231.4,
+  "config": {
+    "chunk_size": 400,
+    "overlap": 80,
+    "top_k": 5,
+    "embed_model": "voyage-3.5",
+    "gen_model": "claude-opus-4-8",
+    "judge_model": "claude-haiku-4-5"
+  },
+  "metrics": {
+    "n_cases": 40,
+    "n_domain": 33,
+    "n_out_of_domain": 7,
+    "retrieval_hit_rate": 1.0,
+    "groundedness": 0.9696969696969697,
+    "refusal_accuracy": 1.0,
+    "domain_answer_rate": 1.0,
+    "_pretty": {
+      "retrieval_hit_rate": "100.0%",
+      "groundedness": "97.0%",
+      "refusal_accuracy": "100.0%",
+      "domain_answer_rate": "100.0%"
+    }
+  },
+  "cases": [
+    {
+      "id": 1,
+      "question": "Which decorator do you use to define a GET endpoint in FastAPI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-first-steps",
+      "retrieved_docs": [
+        "fastapi-first-steps",
+        "fastapi-response-model"
+      ],
+      "top_similarity": 0.7032,
+      "answered": true,
+      "answer": "You use the `@app.get(\"/\")` decorator, which tells FastAPI that the function below handles requests to the specified path using a GET operation.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that `@app.get(\"/\")` is the decorator used to define a GET endpoint in FastAPI, and that it tells FastAPI the function handles requests to the specified path using a GET operation. This is directly supported by the context, which explicitly states: 'The `@app.get(\"/\")` tells **FastAPI** that the function right below is in charge of handling requests that go to: the path `/` using a get operation.' The answer is a concise, accurate summary of information clearly present in the provided context."
+    },
+    {
+      "id": 2,
+      "question": "At what path does FastAPI serve the interactive Swagger UI documentation?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-first-steps",
+      "retrieved_docs": [
+        "fastapi-path-params",
+        "fastapi-first-steps"
+      ],
+      "top_similarity": 0.6591,
+      "answered": true,
+      "answer": "FastAPI serves the interactive Swagger UI documentation at /docs (e.g., http://127.0.0.1:8000/docs).",
+      "judge_grounded": true,
+      "judge_reason": "The context explicitly states 'when you open your browser at http://127.0.0.1:8000/docs, you will see an automatic, interactive, API documentation' and mentions 'integrating Swagger UI' in relation to this path. The answer accurately identifies /docs as the path for Swagger UI documentation, which is directly supported by the context."
+    },
+    {
+      "id": 3,
+      "question": "What class do you instantiate to create the main FastAPI application object?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-first-steps",
+      "retrieved_docs": [
+        "fastapi-first-steps"
+      ],
+      "top_similarity": 0.6028,
+      "answered": true,
+      "answer": "You instantiate the `FastAPI` class, which provides all the functionality for your API. The resulting `app` variable is an instance of this class and serves as the main point of interaction for building your API.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that you instantiate the `FastAPI` class and that the resulting `app` variable is an instance of this class that serves as the main point of interaction for building your API. All of these claims are directly supported by the context, which explicitly states: '`FastAPI` is a Python class that provides all the functionality for your API' and 'Here the `app` variable will be an \"instance\" of the class `FastAPI`. This will be the main point of interaction to create all your API.'"
+    },
+    {
+      "id": 4,
+      "question": "How do you declare the type of a path parameter in FastAPI so it gets validated and converted?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-path-params",
+      "retrieved_docs": [
+        "fastapi-path-params",
+        "fastapi-body"
+      ],
+      "top_similarity": 0.6334,
+      "answered": true,
+      "answer": "You declare the type of a path parameter using standard Python type annotations in the function. For example, declaring `item_id` to be an `int`. With just this type declaration, FastAPI provides data validation and conversion—if you pass a value like \"foo\" that isn't an int, it returns a validation error.",
+      "judge_grounded": true,
+      "judge_reason": "The answer directly matches the context which explicitly states: 'You can declare the type of a path parameter in the function, using standard Python type annotations' and 'In this case, item_id is declared to be an int.' The context also confirms that FastAPI provides validation, showing an example error when 'foo' is passed instead of an int, and states 'with the same Python type declaration, FastAPI gives you data validation.' All claims in the answer are supported by the provided context."
+    },
+    {
+      "id": 5,
+      "question": "What happens in FastAPI when a path parameter declared as int receives a non-integer value?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-path-params",
+      "retrieved_docs": [
+        "fastapi-path-params"
+      ],
+      "top_similarity": 0.6454,
+      "answered": true,
+      "answer": "When a path parameter declared as an int receives a non-integer value (e.g., \"foo\"), FastAPI returns a nice HTTP error with a validation detail indicating the type \"int_parsing\" and the message \"Input should be a valid integer, unable to parse string as an integer\", showing the invalid input. The same error occurs if a float is provided instead of an int. This demonstrates FastAPI's automatic data validation.",
+      "judge_grounded": true,
+      "judge_reason": "The answer accurately describes what happens when a path parameter declared as int receives a non-integer value. All key claims are directly supported by the context: (1) FastAPI returns an HTTP error with validation details, (2) the type field is 'int_parsing', (3) the message states 'Input should be a valid integer, unable to parse string as an integer', (4) it shows the invalid input, (5) the same error occurs with floats, and (6) this demonstrates automatic data validation. All of these details are explicitly present in the provided context."
+    },
+    {
+      "id": 6,
+      "question": "Why does the order of path operations matter when one path is fixed and another is a variable?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-path-params",
+      "retrieved_docs": [
+        "fastapi-path-params"
+      ],
+      "top_similarity": 0.3715,
+      "answered": true,
+      "answer": "The order matters because path operations are evaluated in order. If a fixed path like /users/me is not declared before a variable path like /users/{user_id}, the variable path would also match /users/me, interpreting it as a user_id with the value \"me\". Therefore, the fixed path must be declared first.",
+      "judge_grounded": true,
+      "judge_reason": "The answer is directly supported by the context. The context explicitly states: 'Because *path operations* are evaluated in order, you need to make sure that the path for `/users/me` is declared before the one for `/users/{user_id}` ... Otherwise, the path for `/users/{user_id}` would match also for `/users/me`, \"thinking\" that it's receiving a parameter `user_id` with a value of `\"me\"`.' The answer accurately conveys this explanation about why order matters in path operations."
+    },
+    {
+      "id": 7,
+      "question": "In FastAPI, how is a function parameter treated if it is not declared in the path?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-query-params",
+      "retrieved_docs": [
+        "fastapi-body",
+        "fastapi-path-params",
+        "fastapi-query-params"
+      ],
+      "top_similarity": 0.5208,
+      "answered": true,
+      "answer": "If a function parameter is not declared in the path: if it is of a singular type (like int, float, str, bool, etc.) it is interpreted as a query parameter, and if it is declared as a Pydantic model it is interpreted as a request body.",
+      "judge_grounded": true,
+      "judge_reason": "The answer is fully supported by the context. The context explicitly states: 'If the parameter is of a **singular type** (like `int`, `float`, `str`, `bool`, etc) it will be interpreted as a **query** parameter. If the parameter is declared to be of the type of a **Pydantic model**, it will be interpreted as a request **body**.' The answer accurately captures this information about how function parameters are treated when not declared in the path."
+    },
+    {
+      "id": 8,
+      "question": "How do you make a query parameter optional in FastAPI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-query-params",
+      "retrieved_docs": [
+        "fastapi-query-params",
+        "fastapi-body"
+      ],
+      "top_similarity": 0.6447,
+      "answered": true,
+      "answer": "To make a query parameter optional in FastAPI, set its default value to None. When you declare a default value for a non-path parameter, it becomes not required, so the parameter will be optional and default to None.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that to make a query parameter optional in FastAPI, you set its default value to None. This is directly supported by multiple statements in the context: 'If you don't want to add a specific value but just make it optional, set the default as `None`', 'The same way, you can declare optional query parameters, by setting their default to `None`', and 'When you declare a default value for non-path parameters (for now, we have only seen query parameters), then it is not required.' The answer accurately captures the core mechanism described in the context."
+    },
+    {
+      "id": 9,
+      "question": "What library does FastAPI use to declare and validate request bodies?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-body",
+      "retrieved_docs": [
+        "fastapi-path-params",
+        "fastapi-body",
+        "fastapi-handling-errors"
+      ],
+      "top_similarity": 0.6469,
+      "answered": true,
+      "answer": "FastAPI uses Pydantic to declare and validate request bodies. You import `BaseModel` from pydantic to create your data model, and all data validation is performed under the hood by Pydantic.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that FastAPI uses Pydantic to declare and validate request bodies, and that you import BaseModel from pydantic to create data models. The context explicitly confirms all of these facts: it states 'All the data validation is performed under the hood by Pydantic' and includes a section titled 'Import Pydantic's BaseModel' which explains 'First, you need to import BaseModel from pydantic.' All claims in the answer are directly supported by the provided context."
+    },
+    {
+      "id": 10,
+      "question": "How do you declare a request body in FastAPI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-body",
+      "retrieved_docs": [
+        "fastapi-body"
+      ],
+      "top_similarity": 0.6268,
+      "answered": true,
+      "answer": "To declare a request body in FastAPI, first import BaseModel from pydantic and create your data model. Then add it to your path operation by declaring it the same way you declare path and query parameters, using your created model (e.g., Item) as the type. Function parameters declared as Pydantic models will be taken from the request body.",
+      "judge_grounded": true,
+      "judge_reason": "The answer consists of three main claims, all of which are directly supported by the context: (1) 'import BaseModel from pydantic' - explicitly stated in the context section 'Import Pydantic's BaseModel'; (2) 'create your data model' - mentioned in 'Create your data model' section; (3) 'declare it the same way you declared path and query parameters, using your created model as the type' - stated in 'Declare it as a parameter' section with the exact phrase 'declare it the same way you declared path and query parameters' and 'declare its type as the model you created'; (4) 'function parameters declared as Pydantic models will be taken from the request body' - explicitly stated in the context that 'function parameters that are declared to be Pydantic models should be taken from the request body'. All claims in the answer are directly verifiable from the provided context."
+    },
+    {
+      "id": 11,
+      "question": "Which parameter lets you declare the type used for the response in a FastAPI path operation?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-response-model",
+      "retrieved_docs": [
+        "fastapi-response-model",
+        "fastapi-body",
+        "fastapi-path-params"
+      ],
+      "top_similarity": 0.6358,
+      "answered": true,
+      "answer": "You can use the `response_model` parameter in the path operation decorator to declare the type used for the response. It receives the same type you would declare for a Pydantic model field, so it can be a Pydantic model or, e.g., a list of Pydantic models. It works with any path operation (@app.get(), @app.post(), @app.put(), @app.delete(), etc.).",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that 'response_model' is a parameter in the path operation decorator used to declare the response type, that it receives the same type as Pydantic model fields, that it can be a Pydantic model or list of Pydantic models, and that it works with various path operation decorators. All of these claims are directly supported by the provided context."
+    },
+    {
+      "id": 12,
+      "question": "How can you exclude fields that have default values from a FastAPI response?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-response-model",
+      "retrieved_docs": [
+        "fastapi-response-model"
+      ],
+      "top_similarity": 0.6375,
+      "answered": true,
+      "answer": "You can exclude default values from a FastAPI response by setting the path operation decorator parameter `response_model_exclude_defaults=True`. Additionally, `response_model_exclude_unset=True` excludes fields that were not explicitly set (using their defaults), and `response_model_exclude_none=True` excludes None values.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states three methods for excluding fields from FastAPI responses: response_model_exclude_defaults=True, response_model_exclude_unset=True, and response_model_exclude_none=True. All three are explicitly mentioned in the context. The context confirms that response_model_exclude_defaults=True and response_model_exclude_none=True are valid options, and provides detailed explanation of response_model_exclude_unset=True as a parameter that excludes fields that were not explicitly set. The answer accurately summarizes these three approaches supported by the context."
+    },
+    {
+      "id": 13,
+      "question": "How do you return an HTTP error response to the client in FastAPI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-handling-errors",
+      "retrieved_docs": [
+        "fastapi-handling-errors"
+      ],
+      "top_similarity": 0.6724,
+      "answered": true,
+      "answer": "To return HTTP error responses to the client in FastAPI, you use `HTTPException`. Since it's a normal Python exception with additional data relevant for APIs, you don't `return` it—you `raise` it. When raised, FastAPI terminates the request and sends the HTTP error to the client. For example, when a client requests an item by an ID that doesn't exist, you raise an exception with a status code of 404. You can pass any JSON-convertible value (str, dict, list, etc.) as the `detail` parameter, which FastAPI automatically converts to JSON.",
+      "judge_grounded": true,
+      "judge_reason": "The answer is fully supported by the context. The context explicitly states: (1) 'To return HTTP responses with errors to the client you use `HTTPException`', (2) '`HTTPException` is a normal Python exception with additional data relevant for APIs', (3) 'Because it's a Python exception, you don't `return` it, you `raise` it', (4) the example shows raising an exception with a status code of 404 for non-existent items, and (5) 'When raising an `HTTPException`, you can pass any value that can be converted to JSON as the parameter `detail`, not only `str`. You could pass a `dict`, a `list`, etc. They are handled automatically by **FastAPI** and converted to JSON.' All claims in the answer are directly supported by the provided context."
+    },
+    {
+      "id": 14,
+      "question": "Do you return or raise an HTTPException in FastAPI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-handling-errors",
+      "retrieved_docs": [
+        "fastapi-handling-errors"
+      ],
+      "top_similarity": 0.6983,
+      "answered": true,
+      "answer": "You raise an HTTPException in FastAPI, you don't return it. Because it's a Python exception, you use `raise` rather than `return`.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that you raise an HTTPException in FastAPI rather than returning it, and explains that because it's a Python exception you use 'raise' rather than 'return'. This is directly supported by multiple statements in the context, including: 'Because it's a Python exception, you don't `return` it, you `raise` it.' This exact statement appears twice in the provided context, making the answer fully grounded."
+    },
+    {
+      "id": 15,
+      "question": "How do you add custom headers to an HTTP error in FastAPI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-handling-errors",
+      "retrieved_docs": [
+        "fastapi-handling-errors"
+      ],
+      "top_similarity": 0.6531,
+      "answered": true,
+      "answer": "You can add custom headers to an HTTP error in FastAPI for advanced scenarios, such as certain types of security. Although you probably won't need to use it directly in your code, FastAPI allows you to add custom headers when raising an HTTP error in case you need it.",
+      "judge_grounded": false,
+      "judge_reason": "The answer mentions that you can add custom headers to HTTP errors in FastAPI, but it does not provide the actual implementation details or code examples for how to do so. The context indicates there is a section titled 'Add custom headers' but the actual instructions on how to implement this feature are not included in the provided context. The answer is incomplete - it acknowledges the feature exists but doesn't explain the method of actually adding custom headers, which was the core of the question."
+    },
+    {
+      "id": 16,
+      "question": "What SQL statement enables the pgvector extension in Supabase?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-vector-columns",
+      "retrieved_docs": [
+        "supabase-vector-columns",
+        "supabase-indexes-hnsw",
+        "supabase-semantic-search"
+      ],
+      "top_similarity": 0.7112,
+      "answered": true,
+      "answer": "To enable the pgvector extension, run: `create extension vector with schema extensions;`",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that to enable the pgvector extension, you should run 'create extension vector with schema extensions;' This statement is directly supported by the context, which shows this exact SQL command multiple times as the way to enable the vector extension in Supabase."
+    },
+    {
+      "id": 17,
+      "question": "How do you specify the number of dimensions of a vector column in Postgres?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-vector-columns",
+      "retrieved_docs": [
+        "supabase-vector-columns",
+        "supabase-semantic-search"
+      ],
+      "top_similarity": 0.5784,
+      "answered": true,
+      "answer": "In Postgres, you specify the number of dimensions of a vector column by placing the number in parentheses after the vector data type. For example, `embedding extensions.vector(384)` creates a column storing 384 dimensions. The number in parentheses represents the number of dimensions, and you should change it to match the number of dimensions your embedding model produces.",
+      "judge_grounded": true,
+      "judge_reason": "The answer accurately states that the number of dimensions is specified by placing a number in parentheses after the vector data type, and provides the example `embedding extensions.vector(384)`. This is directly supported by multiple statements in the context: 'The size of the vector (as indicated in parentheses) represents the number of dimensions in the embedding' and the various code examples showing this syntax. The explanation that the number should match the embedding model's dimensions is also explicitly stated in the context."
+    },
+    {
+      "id": 18,
+      "question": "What does semantic search use to compare a query with stored documents?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-semantic-search",
+      "retrieved_docs": [
+        "supabase-semantic-search",
+        "supabase-vector-columns"
+      ],
+      "top_similarity": 0.6129,
+      "answered": true,
+      "answer": "Semantic search uses embeddings (embedding vectors) generated by a language model to represent text, then compares them using a similarity metric such as cosine similarity or dot product. The documents whose embeddings are most similar to the query's are returned as the most relevant results.",
+      "judge_grounded": true,
+      "judge_reason": "The answer accurately states that semantic search uses embeddings generated by a language model and compares them using similarity metrics like cosine similarity or dot product. It also correctly notes that documents with the most similar embeddings are returned as the most relevant results. All of these claims are directly supported by the provided context, which explicitly discusses embeddings, language models, similarity metrics (cosine similarity and dot product), and the comparison process."
+    },
+    {
+      "id": 19,
+      "question": "What kind of Supabase feature is recommended to generate embeddings?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-embeddings",
+      "retrieved_docs": [
+        "supabase-vector-columns",
+        "supabase-semantic-search",
+        "supabase-embeddings"
+      ],
+      "top_similarity": 0.6314,
+      "answered": true,
+      "answer": "Supabase Edge Functions are recommended to generate embeddings, as they have built-in support for the gte-small model.",
+      "judge_grounded": true,
+      "judge_reason": "The context explicitly states 'Supabase Edge Functions has [built in support] for the `gte-small` model,' which directly supports the answer that Supabase Edge Functions are recommended for generating embeddings with built-in support for gte-small."
+    },
+    {
+      "id": 20,
+      "question": "Name an open-source embedding model mentioned for generating embeddings in Supabase.",
+      "must_refuse": false,
+      "relevant_doc": "supabase-embeddings",
+      "retrieved_docs": [
+        "supabase-semantic-search",
+        "supabase-vector-columns",
+        "supabase-embeddings"
+      ],
+      "top_similarity": 0.6299,
+      "answered": true,
+      "answer": "The open-source embedding model mentioned for generating embeddings in Supabase is `gte-small`.",
+      "judge_grounded": true,
+      "judge_reason": "The CONTEXT explicitly mentions `gte-small` as an open-source embedding model multiple times, including statements that 'Supabase Edge Functions has built in support for the `gte-small` model' and 'only the `gte-small` text embedding model is supported in Supabase's Edge Runtime.' The answer directly names this model as requested and is fully supported by the provided context."
+    },
+    {
+      "id": 21,
+      "question": "Where do Postgres database functions live, according to the Supabase docs?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-functions",
+      "retrieved_docs": [
+        "supabase-functions"
+      ],
+      "top_similarity": 0.6116,
+      "answered": true,
+      "answer": "Postgres database functions live inside your database, and they can be used with the API.",
+      "judge_grounded": true,
+      "judge_reason": "The answer directly states that 'Postgres database functions live inside your database, and they can be used with the API.' This is explicitly supported by the CONTEXT which says: 'These functions live inside your database, and they can be [used with the API](../../reference/javascript/rpc).' The answer is a direct extraction from the provided context with no unsupported claims."
+    },
+    {
+      "id": 22,
+      "question": "What is the difference between SECURITY INVOKER and SECURITY DEFINER in a Postgres function?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-functions",
+      "retrieved_docs": [
+        "supabase-functions",
+        "supabase-rls"
+      ],
+      "top_similarity": 0.6478,
+      "answered": true,
+      "answer": "In Postgres, SECURITY INVOKER means the function is executed as the user calling the function, while SECURITY DEFINER means the function is executed as the creator of the function. For example, a security definer function runs using the same role that created it, so if created by a superuser (like postgres), it will have bypassrls privileges. It is best practice to use security invoker (also the default). If you use security definer, you must set the search_path; and with an empty search path you must explicitly state the schema for every relation in the function body.",
+      "judge_grounded": true,
+      "judge_reason": "The answer correctly describes the difference between SECURITY INVOKER and SECURITY DEFINER based on the context provided. All claims are directly supported: (1) INVOKER executes as the calling user, (2) DEFINER executes as the creator, (3) security definer functions inherit the privileges of the creator (bypassrls if superuser), (4) INVOKER is best practice and default, (5) DEFINER requires setting search_path with explicit schema references. Each statement in the answer can be verified in the provided context."
+    },
+    {
+      "id": 23,
+      "question": "How do you call a Postgres database function from the Supabase client?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-functions",
+      "retrieved_docs": [
+        "supabase-functions",
+        "supabase-vector-columns"
+      ],
+      "top_similarity": 0.6155,
+      "answered": true,
+      "answer": "You call a Postgres database function from the Supabase client using the `rpc()` method, passing the name of the function and any parameters. For example: `const { data, error } = await supabase.rpc('hello_world')`, or with parameters: `await supabase.rpc('add_planet', { name: 'Jakku' })`. To pass arguments, include them as an object, e.g. `supabaseClient.rpc('match_documents', { query_embedding: embedding, match_threshold: 0.78, match_count: 10 })`.",
+      "judge_grounded": true,
+      "judge_reason": "The answer is fully supported by the context. It correctly states that the `rpc()` method is used to call Postgres functions from the Supabase client, and provides accurate examples that are directly found in the context: `supabase.rpc('hello_world')`, `supabase.rpc('add_planet', { name: 'Jakku' })`, and `supabaseClient.rpc('match_documents', { query_embedding: embedding, match_threshold: 0.78, match_count: 10 })`. All code examples and explanations are verbatim or paraphrased from the provided context."
+    },
+    {
+      "id": 24,
+      "question": "What Postgres feature does Supabase use to restrict access to rows on a per-user basis?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-rls",
+      "retrieved_docs": [
+        "supabase-rls"
+      ],
+      "top_similarity": 0.6892,
+      "answered": true,
+      "answer": "Supabase uses Postgres's Row Level Security (RLS) to provide granular authorization rules and restrict access to rows. Supabase enables convenient and secure data access from the browser as long as RLS is enabled.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that Supabase uses Postgres's Row Level Security (RLS) to provide granular authorization rules and restrict access to rows, and that Supabase enables convenient and secure data access from the browser as long as RLS is enabled. All of these claims are directly supported by the context, which explicitly states 'When you need granular authorization rules, nothing beats Postgres's Row Level Security (RLS)' and 'Supabase allows convenient and secure data access from the browser, as long as you enable RLS.'"
+    },
+    {
+      "id": 25,
+      "question": "Which clause of an RLS policy defines which existing rows it applies to for SELECT or UPDATE?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-rls",
+      "retrieved_docs": [
+        "supabase-rls"
+      ],
+      "top_similarity": 0.5293,
+      "answered": true,
+      "answer": "The `using` clause defines which existing rows a policy applies to. For UPDATE, the USING case determines which rows are visible, and if no `with check` expression is defined, the `using` expression is used both to determine which rows are visible (normal USING case) and which new rows will be allowed.",
+      "judge_grounded": true,
+      "judge_reason": "The answer correctly identifies the USING clause as defining which existing rows a policy applies to for SELECT or UPDATE operations. The context explicitly states that the USING clause is used to 'determine which rows are visible' and that 'If no `with check` expression is defined, then the `using` expression will be used both to determine which rows are visible (normal USING case) and which new rows will be allowed to be added (WITH CHECK case).' The context also shows examples of RLS policies using the USING clause for SELECT operations. All factual claims in the answer are supported by the provided context."
+    },
+    {
+      "id": 26,
+      "question": "Which clause of an RLS policy checks new rows being inserted or updated?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-rls",
+      "retrieved_docs": [
+        "supabase-rls"
+      ],
+      "top_similarity": 0.5618,
+      "answered": true,
+      "answer": "The `with check` clause of an RLS policy checks new rows being inserted or updated, ensuring that new row data adheres to the policy constraints. For UPDATE, the `with check` clause ensures the updates adhere to the policy constraints. If no `with check` expression is defined, the `using` expression is used for both visibility and the WITH CHECK case.",
+      "judge_grounded": true,
+      "judge_reason": "The answer is fully supported by the context. The context explicitly states that the `with check` clause is used for INSERT policies (\"You can specify insert policies with the `with check` clause. The `with check` expression ensures that any new row data adheres to the policy constraints.\") and for UPDATE policies (\"the `with check` clause ensures that the updates made adhere to the policy constraints.\"). The context also confirms that if no `with check` expression is defined, the `using` expression will be used for both visibility and the WITH CHECK case. All claims in the answer are directly supported by passages in the provided context."
+    },
+    {
+      "id": 27,
+      "question": "Which operator class does pgvector use to build an HNSW index for cosine distance?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-indexes-hnsw",
+      "retrieved_docs": [
+        "supabase-indexes-hnsw",
+        "supabase-indexes-ivfflat"
+      ],
+      "top_similarity": 0.6274,
+      "answered": true,
+      "answer": "pgvector uses the `vector_cosine_ops` operator class to build an HNSW index for cosine distance: `create index on items using hnsw (column_name vector_cosine_ops);`",
+      "judge_grounded": true,
+      "judge_reason": "The answer directly matches information provided in the CONTEXT. The CONTEXT explicitly shows a section titled 'Cosine distance (`vector_cosine_ops`)' with the exact SQL command 'create index on items using hnsw (column_name vector_cosine_ops);' that the answer references. All factual claims in the answer are fully supported by the retrieved context."
+    },
+    {
+      "id": 28,
+      "question": "For what kind of workload is an HNSW index best suited?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-indexes-hnsw",
+      "retrieved_docs": [
+        "supabase-semantic-search",
+        "supabase-indexes-hnsw",
+        "supabase-indexes-ivfflat"
+      ],
+      "top_similarity": 0.6491,
+      "answered": true,
+      "answer": "An HNSW index is best suited for high accuracy requirements, read-heavy workloads, low-latency semantic search, and scenarios where recall is more important than memory usage. It should be the default choice when you don't need 100% accuracy and are willing to trade a small amount of accuracy for a lot of throughput.",
+      "judge_grounded": true,
+      "judge_reason": "The answer is fully supported by the context. The CONTEXT explicitly states under 'Best for:' that HNSW indexes are best for: 'High accuracy requirements', 'Read-heavy workloads', 'Low-latency semantic search', and 'Scenarios where recall is more important than memory usage'. Additionally, the CONTEXT states 'HNSW should be your default choice when creating a vector index' and 'Add the index when you don't need 100% accuracy and are willing to trade a small amount of accuracy for a lot of throughput.' All factual claims in the answer are directly supported by the provided context."
+    },
+    {
+      "id": 29,
+      "question": "What parameter controls the number of lists in an IVFFlat index?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-indexes-ivfflat",
+      "retrieved_docs": [
+        "supabase-indexes-ivfflat"
+      ],
+      "top_similarity": 0.4296,
+      "answered": true,
+      "answer": "The number of lists in an IVFFlat index is controlled by the `lists` parameter, specified in the `with` clause when creating the index (e.g., `with (lists = 100)`).",
+      "judge_grounded": true,
+      "judge_reason": "The answer correctly identifies that the `lists` parameter controls the number of lists in an IVFFlat index. This is directly supported by multiple examples in the context showing the syntax `with (lists = 100)` used in CREATE INDEX statements for IVFFlat indexes."
+    },
+    {
+      "id": 30,
+      "question": "Why should an IVFFlat index be created only after the table already contains data?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-indexes-ivfflat",
+      "retrieved_docs": [
+        "supabase-indexes-ivfflat",
+        "supabase-indexes-hnsw"
+      ],
+      "top_similarity": 0.4662,
+      "answered": true,
+      "answer": "An IVFFlat index should be created only after the table has sufficient data because pgvector builds the index's internal IVFFlat cell clusters based on your data's distribution. If the distribution changes significantly later, you should consider rebuilding the indexes.",
+      "judge_grounded": true,
+      "judge_reason": "The answer directly paraphrases the context which states: 'pgvector recommends building IVFFlat indexes only after the table has sufficient data, so that the internal IVFFlat cell clusters are based on your data's distribution. Anytime the distribution changes significantly, consider rebuilding indexes.' All claims in the answer are supported by this passage."
+    },
+    {
+      "id": 31,
+      "question": "In FastAPI, what type can you use to restrict a path parameter to a fixed set of values?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-path-params",
+      "retrieved_docs": [
+        "fastapi-path-params"
+      ],
+      "top_similarity": 0.5989,
+      "answered": true,
+      "answer": "In FastAPI, you can use a standard Python `Enum` to restrict a path parameter to a predefined set of valid values. You create a sub-class that inherits from both `str` and `Enum`, then define class attributes with the fixed valid values.",
+      "judge_grounded": true,
+      "judge_reason": "The answer states that you can use a standard Python `Enum` to restrict a path parameter to predefined values, and that you create a sub-class inheriting from both `str` and `Enum` with fixed values as class attributes. All of these claims are directly supported by the context provided, which explicitly states: 'you can use a standard Python `Enum`', 'create a sub-class that inherits from `str` and from `Enum`', and 'Then create class attributes with fixed values, which will be the available valid values'."
+    },
+    {
+      "id": 32,
+      "question": "What alternative documentation UI does FastAPI provide besides Swagger UI?",
+      "must_refuse": false,
+      "relevant_doc": "fastapi-first-steps",
+      "retrieved_docs": [
+        "fastapi-first-steps",
+        "fastapi-path-params"
+      ],
+      "top_similarity": 0.7742,
+      "answered": true,
+      "answer": "Besides Swagger UI, FastAPI provides alternative automatic API documentation using ReDoc, accessible at http://127.0.0.1:8000/redoc.",
+      "judge_grounded": true,
+      "judge_reason": "The context explicitly states that FastAPI provides alternative API documentation using ReDoc, which can be accessed at http://127.0.0.1:8000/redoc. This is clearly stated multiple times in the provided context, including 'FastAPI itself provides an alternative API documentation (using ReDoc), which you can access at http://127.0.0.1:8000/redoc' and 'You will see the alternative automatic documentation (provided by ReDoc)'. The answer accurately reflects information directly present in the context."
+    },
+    {
+      "id": 33,
+      "question": "In a semantic search SQL function over pgvector, what is typically used to keep only sufficiently similar matches?",
+      "must_refuse": false,
+      "relevant_doc": "supabase-semantic-search",
+      "retrieved_docs": [
+        "supabase-semantic-search",
+        "supabase-vector-columns"
+      ],
+      "top_similarity": 0.6093,
+      "answered": true,
+      "answer": "A match_threshold is used in the WHERE clause to filter and keep only sufficiently similar matches. For cosine distance (<=>), the condition compares the distance against 1 - match_threshold (e.g., where documents.embedding <=> query_embedding < 1 - match_threshold, or equivalently 1 - (distance) > match_threshold). For negative inner product (<#>), the match_threshold is negated accordingly since <#> is negative.",
+      "judge_grounded": true,
+      "judge_reason": "The answer correctly identifies that match_threshold is used in the WHERE clause to filter similar matches, and accurately describes how it's applied for both cosine distance (<=> operator) and negative inner product (<#> operator). The specific examples provided in the answer (e.g., 'where documents.embedding <=> query_embedding < 1 - match_threshold' and the equivalence '1 - (distance) > match_threshold') are directly present in the context. The explanation that the match_threshold is negated for the <#> operator because it's negative is also supported by the context statement 'Note that since `<#>` is negative, we negate `match_threshold` accordingly in the `where` clause.'"
+    },
+    {
+      "id": 34,
+      "question": "What is the capital of Australia?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "supabase-indexes-hnsw",
+        "supabase-semantic-search"
+      ],
+      "top_similarity": 0.4111,
+      "answered": false,
+      "answer": "I don't have that information in the sources.",
+      "judge_grounded": null,
+      "judge_reason": null
+    },
+    {
+      "id": 35,
+      "question": "Who wrote the novel 'One Hundred Years of Solitude'?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "supabase-indexes-hnsw",
+        "supabase-embeddings",
+        "fastapi-response-model",
+        "supabase-rls",
+        "fastapi-body"
+      ],
+      "top_similarity": 0.3278,
+      "answered": false,
+      "answer": "I don't have that information in the sources.",
+      "judge_grounded": null,
+      "judge_reason": null
+    },
+    {
+      "id": 36,
+      "question": "How does React's useEffect hook work?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "fastapi-response-model",
+        "supabase-vector-columns",
+        "supabase-rls",
+        "supabase-embeddings"
+      ],
+      "top_similarity": 0.401,
+      "answered": false,
+      "answer": "I don't have that information in the provided sources. The context does not cover React's useEffect hook.",
+      "judge_grounded": null,
+      "judge_reason": null
+    },
+    {
+      "id": 37,
+      "question": "What is the boiling point of water at sea level in Celsius?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "supabase-embeddings",
+        "supabase-vector-columns",
+        "fastapi-response-model",
+        "supabase-indexes-hnsw",
+        "supabase-semantic-search"
+      ],
+      "top_similarity": 0.4166,
+      "answered": false,
+      "answer": "I don't have that information in the sources.",
+      "judge_grounded": null,
+      "judge_reason": null
+    },
+    {
+      "id": 38,
+      "question": "What is the syntax for a for loop in Rust?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "supabase-semantic-search",
+        "supabase-functions",
+        "fastapi-path-params"
+      ],
+      "top_similarity": 0.4266,
+      "answered": false,
+      "answer": "I don't have that information in the provided sources.",
+      "judge_grounded": null,
+      "judge_reason": null
+    },
+    {
+      "id": 39,
+      "question": "Who is the current president of Argentina?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "supabase-embeddings",
+        "supabase-semantic-search",
+        "supabase-vector-columns",
+        "supabase-rls"
+      ],
+      "top_similarity": 0.355,
+      "answered": false,
+      "answer": "I don't have that information in the provided sources.",
+      "judge_grounded": null,
+      "judge_reason": null
+    },
+    {
+      "id": 40,
+      "question": "What is the tallest mountain on Earth?",
+      "must_refuse": true,
+      "relevant_doc": null,
+      "retrieved_docs": [
+        "supabase-indexes-hnsw",
+        "supabase-embeddings",
+        "fastapi-response-model",
+        "supabase-functions",
+        "supabase-semantic-search"
+      ],
+      "top_similarity": 0.4434,
+      "answered": false,
+      "answer": "I don't have that information in the sources.",
+      "judge_grounded": null,
+      "judge_reason": null
+    }
+  ]
+}

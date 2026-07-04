@@ -7,8 +7,8 @@ mejoran el recall pero fragmentan el contexto.
 """
 from __future__ import annotations
 
-DEFAULT_CHUNK_SIZE = 1000
-DEFAULT_OVERLAP = 150
+DEFAULT_CHUNK_SIZE = 400
+DEFAULT_OVERLAP = 80
 
 
 def chunk_text(

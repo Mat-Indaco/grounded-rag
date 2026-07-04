@@ -5,14 +5,7 @@ These functions live inside your database, and they can be [used with the API](.
 
 ## Quick demo
 
-<div className="video-container">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/MJZCCpCYEqk"
-    frameBorder="1"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  ></iframe>
-</div>
+  
 
 ## Getting started
 
@@ -39,8 +32,7 @@ $$; --6
 
 ```
 
-<details>
-<summary>Show/Hide Details</summary>
+Show/Hide Details
 
 At it's most basic a function has the following parts:
 
@@ -50,10 +42,6 @@ At it's most basic a function has the following parts:
 4. `as $$`: The function wrapper. Anything enclosed inside the `$$` symbols will be part of the function body.
 5. `select 'hello world';`: A basic function body. The final `select` statement inside a function body will be returned if there are no statements following it.
 6. `$$;`: The closing symbols of the function wrapper.
-
-</details>
-
-<br />
 
 When naming your functions, make the name of the function unique as overloaded functions are not supported.
 
@@ -108,7 +96,7 @@ Database Functions can also return data sets from [Tables](../../guides/database
 
 For example, if we had a database with some Star Wars data inside:
 
-<h4>Planets</h4>
+Planets
 
 ```
 | id  | name     |
@@ -118,7 +106,7 @@ For example, if we had a database with some Star Wars data inside:
 | 3   | Kashyyyk |
 ```
 
-<h4>People</h4>
+People
 
 ```
 | id  | name             | planet_id |
@@ -419,7 +407,7 @@ Value checking is common, so Postgres provides a shorthand: the `assert` keyword
 
 ```sql
 -- throw error when condition is false
-assert <some condition>, 'message';
+assert , 'message';
 ```
 
 Below is an example
@@ -462,7 +450,7 @@ begin
 
   exception
       when others then
-          raise exception 'An error occurred in function <function name>: %', sqlerrm;
+          raise exception 'An error occurred in function : %', sqlerrm;
 end;
 $$;
 ```
@@ -532,33 +520,10 @@ select advanced_example();
 
 ### Create Database Functions
 
-<div className="video-container">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/MJZCCpCYEqk"
-    frameBorder="1"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  ></iframe>
-</div>
+  
 
 ### Call Database Functions using JavaScript
 
-<div className="video-container">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/I6nnp9AINJk"
-    frameBorder="1"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  ></iframe>
-</div>
+  
 
 ### Using Database Functions to call an external API
-
-<div className="video-container">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/rARgrELRCwY"
-    frameBorder="1"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  ></iframe>
-</div>

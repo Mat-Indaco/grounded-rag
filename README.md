@@ -42,9 +42,23 @@ grounded-rag/
 
 - [x] **Fase 1 — MVP.** Ingest + query + chat con citas. **Deployado y público** (Vercel + Render). ✅
 - [ ] **Fase 2 — Guardrails.** Umbral de "no sé" + validación de salida + juez de groundedness.
-- [ ] **Fase 3 — Evals.** Dataset de 30–50 casos + 3 métricas (hit rate, groundedness, refusal accuracy).
+- [x] **Fase 3 — Evals.** Dataset de 40 casos + 3 métricas + LLM-as-judge. ✅ (ver abajo)
 - [ ] **Fase 4 — Dashboard + observabilidad.** Página `/evals` + costo/latencia por consulta.
 - [ ] **Fase 5 (stretch) — MCP.** Exponer el retrieval como server MCP.
+
+## Resultados de evaluación
+
+Suite de 40 casos (33 de dominio + 7 fuera de dominio) sobre el corpus real. Juez de
+groundedness: `claude-haiku-4-5`. Corré con `python evals/run_evals.py`; resultados
+versionados en [`evals/results/`](./evals/results/).
+
+| Configuración | Retrieval hit rate | Groundedness | Refusal accuracy | Domain answer rate |
+|---|---|---|---|---|
+| Baseline (chunk 1000, overlap 150) | 100% | 93.5% | 100% | 93.9% |
+| **Chunk 400, overlap 80** | 100% | **97.0%** | 100% | **100%** |
+
+Las preguntas fuera de dominio (`must_refuse`) miden si el sistema sabe decir "no sé":
+100% de abstención correcta. Esa métrica sola ya es una historia de entrevista.
 
 ## Cómo correrlo (local)
 
@@ -97,8 +111,6 @@ npm run dev   # http://localhost:3000
 
 ## Decisiones de diseño
 
-_(se irán completando con datos de los evals — Fase 3)_
-
 - **Embeddings con Voyage, no Anthropic:** Anthropic no tiene endpoint de embeddings.
   Voyage es su partner recomendado y `voyage-3.5` da 1024 dims, que es lo que usa el índice.
 - **Salida estructurada desde Fase 1:** la respuesta de `/query` es JSON validado
@@ -110,3 +122,17 @@ _(se irán completando con datos de los evals — Fase 3)_
   vecinos. Migré a HNSW, que devuelve resultados correctos con cualquier tamaño de corpus.
   Medición: pregunta fuera de dominio → top similitud ~0.33; pregunta del corpus → ~0.55+.
   Esa brecha es la base del umbral de abstención de la Fase 2.
+- **Tamaño de chunk 400 en vez de 1000 (medido en Fase 3):** con chunks de 1000 tokens un
+  fragmento mezclaba varios temas y la generación quedaba menos anclada. Bajar a 400 con
+  overlap 80 subió groundedness de 93.5% a 97.0% sin tocar el hit rate. La config está en
+  [`core/chunking.py`](./apps/api/core/chunking.py) y quedó versionada en cada corrida de evals.
+- **Los evals cazan preguntas malas, no solo bugs del sistema (Fase 3):** dos casos de dominio
+  daban abstención. Mi hipótesis era que el chunk grande no traía el fragmento correcto; el eval
+  mostró que estaba equivocado — el "answer conocido" que yo había escrito **no estaba en el
+  corpus** (ej: "stored procedures" no aparece en la doc de Supabase). El sistema hacía lo
+  correcto al abstenerse. Corregir esas preguntas llevó el domain answer rate a 100%. La
+  moraleja: un RAG que se abstiene bien te obliga a tener un dataset honesto.
+- **Límite conocido (honestidad):** una pregunta sobre headers custom en `HTTPException` queda
+  no-grounded porque al limpiar la doc de FastAPI saqué los includes de código (`{* ... *}`), así
+  que el mecanismo exacto no está en el contexto y el modelo lo completa de memoria. Inlinear ese
+  código al corpus lo resolvería.

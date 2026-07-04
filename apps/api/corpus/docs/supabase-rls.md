@@ -364,7 +364,7 @@ using btree (user_id);
 
 | Test                                                                                          | Before (ms) | After (ms) | % Improvement | Change                                                                                                   |
 | --------------------------------------------------------------------------------------------- | ----------- | ---------- | ------------- | -------------------------------------------------------------------------------------------------------- |
-| [test1-indexed](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test1-indexed) | 171         | < 0.1      | 99.94%        | <details className="cursor-pointer">Before:<br/>No index<br/><br/>After:<br/>`user_id` indexed</details> |
+| [test1-indexed](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test1-indexed) | 171         | < 0.1      | 99.94%        | Before:<br/>No index<br/><br/>After:<br/>`user_id` indexed |
 
 ### Call functions with `select`
 
@@ -392,11 +392,11 @@ You can only use this technique if the results of the query or function do not c
 
 | Test                                                                                                                              | Before (ms) | After (ms) | % Improvement | Change                                                                                                                                                                    |
 | --------------------------------------------------------------------------------------------------------------------------------- | ----------- | ---------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [test2a-wrappedSQL-uid](<https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2a-wrappedSQL-uid()>)                 | 179         | 9          | 94.97%        | <details className="cursor-pointer">Before:<br/>`auth.uid() = user_id` <br/><br/>After:<br/> `(select auth.uid()) = user_id`</details>                                    |
-| [test2b-wrappedSQL-isadmin](<https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2b-wrappedSQL-isadmin()>)         | 11,000      | 7          | 99.94%        | <details className="cursor-pointer">Before:<br/>`is_admin()` _table join_<br/><br/>After:<br/>`(select is_admin())` _table join_</details>                                |
-| [test2c-wrappedSQL-two-functions](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2c-wrappedSQL-two-functions) | 11,000      | 10         | 99.91%        | <details className="cursor-pointer">Before:<br/>`is_admin() OR auth.uid() = user_id`<br/><br/>After:<br/>`(select is_admin()) OR (select auth.uid() = user_id)`</details> |
-| [test2d-wrappedSQL-sd-fun](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2d-wrappedSQL-sd-fun)               | 178,000     | 12         | 99.993%       | <details className="cursor-pointer">Before:<br/>`has_role() = role` <br/><br/>After:<br/>(select has_role()) = role</details>                                             |
-| [test2e-wrappedSQL-sd-fun-array](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2e-wrappedSQL-sd-fun-array)   | 173000      | 16         | 99.991%       | <details className="cursor-pointer">Before:<br/>`team_id=any(user_teams())` <br/><br/>After:<br/>team_id=any(array(select user_teams()))</details>                        |
+| [test2a-wrappedSQL-uid](<https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2a-wrappedSQL-uid()>)                 | 179         | 9          | 94.97%        | Before:<br/>`auth.uid() = user_id` <br/><br/>After:<br/> `(select auth.uid()) = user_id`                                    |
+| [test2b-wrappedSQL-isadmin](<https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2b-wrappedSQL-isadmin()>)         | 11,000      | 7          | 99.94%        | Before:<br/>`is_admin()` _table join_<br/><br/>After:<br/>`(select is_admin())` _table join_                                |
+| [test2c-wrappedSQL-two-functions](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2c-wrappedSQL-two-functions) | 11,000      | 10         | 99.91%        | Before:<br/>`is_admin() OR auth.uid() = user_id`<br/><br/>After:<br/>`(select is_admin()) OR (select auth.uid() = user_id)` |
+| [test2d-wrappedSQL-sd-fun](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2d-wrappedSQL-sd-fun)               | 178,000     | 12         | 99.993%       | Before:<br/>`has_role() = role` <br/><br/>After:<br/>(select has_role()) = role                                             |
+| [test2e-wrappedSQL-sd-fun-array](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test2e-wrappedSQL-sd-fun-array)   | 173000      | 16         | 99.991%       | Before:<br/>`team_id=any(user_teams())` <br/><br/>After:<br/>team_id=any(array(select user_teams()))                        |
 
 ### Add filters to every query
 
@@ -425,7 +425,7 @@ Even though this duplicates the contents of the Policy, Postgres can use the fil
 
 | Test                                                                                              | Before (ms) | After (ms) | % Improvement | Change                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------- | ----------- | ---------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| [test3-addfilter](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test3-addfilter) | 171         | 9          | 94.74%        | <details className="cursor-pointer">Before:<br/>`auth.uid() = user_id`<br/><br/>After:<br/>add `.eq` or `where` on `user_id`</details> |
+| [test3-addfilter](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test3-addfilter) | 171         | 9          | 94.74%        | Before:<br/>`auth.uid() = user_id`<br/><br/>After:<br/>add `.eq` or `where` on `user_id` |
 
 ### Use security definer functions
 
@@ -507,7 +507,7 @@ If the list exceeds 1000 items, a different approach may be needed or you may ne
 
 | Test                                                                                                | Before (ms) | After (ms) | % Improvement | Change                                                                                                                                            |
 | --------------------------------------------------------------------------------------------------- | ----------- | ---------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [test5-fixed-join](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test5-fixed-join) | 9,000       | 20         | 99.78%        | <details className="cursor-pointer">Before:<br/>`auth.uid()` in table join on col<br/><br/>After:<br/>col in table join on `auth.uid()`</details> |
+| [test5-fixed-join](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test5-fixed-join) | 9,000       | 20         | 99.78%        | Before:<br/>`auth.uid()` in table join on col<br/><br/>After:<br/>col in table join on `auth.uid()` |
 
 ### Specify roles in your policies
 
@@ -532,7 +532,7 @@ This prevents the policy `( (select auth.uid()) = user_id )` from running for an
 
 | Test                                                                                          | Before (ms) | After (ms) | % Improvement | Change                                                                                                                           |
 | --------------------------------------------------------------------------------------------- | ----------- | ---------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [test6-To-role](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test6-To-role) | 170         | < 0.1      | 99.78%        | <details className="cursor-pointer">Before:<br/>No `TO` policy<br/><br/>After:<br/>`TO authenticated` (anon accessing)</details> |
+| [test6-To-role](https://github.com/GaryAustin1/RLS-Performance/tree/main/tests/test6-To-role) | 170         | < 0.1      | 99.78%        | Before:<br/>No `TO` policy<br/><br/>After:<br/>`TO authenticated` (anon accessing) |
 
 ## More resources
 

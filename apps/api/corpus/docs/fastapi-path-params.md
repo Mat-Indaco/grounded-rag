@@ -62,8 +62,6 @@ This is incredibly helpful while developing and debugging code that interacts wi
 
 And when you open your browser at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs), you will see an automatic, interactive, API documentation like:
 
-<img src="/img/tutorial/path-params/image01.png">
-
 Again, just with that same Python type declaration, **FastAPI** gives you automatic, interactive documentation (integrating Swagger UI).
 
 Notice that the path parameter is declared to be an integer.
@@ -73,8 +71,6 @@ Notice that the path parameter is declared to be an integer.
 And because the generated schema is from the [OpenAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.1.0.md) standard, there are many compatible tools.
 
 Because of this, **FastAPI** itself provides an alternative API documentation (using ReDoc), which you can access at [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc):
-
-<img src="/img/tutorial/path-params/image02.png">
 
 The same way, there are many compatible tools. Including code generation tools for many languages.
 
@@ -120,8 +116,6 @@ Then create a *path parameter* with a type annotation using the enum class you c
 ### Check the docs
 
 Because the available values for the *path parameter* are predefined, the interactive docs can show them nicely:
-
-<img src="/img/tutorial/path-params/image03.png">
 
 ### Working with Python *enumerations*
 
