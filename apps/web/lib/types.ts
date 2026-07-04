@@ -17,3 +17,23 @@ export interface ChatTurn {
   error?: string;
   loading?: boolean;
 }
+
+export interface RecentQuery {
+  question: string;
+  grounded: boolean | null;
+  tokens_in: number | null;
+  tokens_out: number | null;
+  latency_ms: number | null;
+  created_at: string;
+}
+
+export interface Stats {
+  total_queries: number;
+  grounded_rate?: number;
+  avg_latency_ms?: number | null;
+  p50_latency_ms?: number | null;
+  total_tokens_in?: number;
+  total_tokens_out?: number;
+  estimated_cost_usd?: number;
+  recent: RecentQuery[];
+}

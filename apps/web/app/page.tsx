@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ChatMessage } from "@/components/ChatMessage";
 import { askQuestion } from "@/lib/api";
 import type { ChatTurn } from "@/lib/types";
@@ -43,8 +44,11 @@ export default function Home() {
       <div className="header">
         <h1>Grounded RAG Assistant</h1>
         <p>
-          Preguntá sobre la documentación indexada (FastAPI · Next.js · Supabase).
-          Cada respuesta viene con sus fuentes; si no está en el corpus, lo dice.
+          Preguntá sobre la documentación indexada (FastAPI · Supabase). Cada
+          respuesta viene con sus fuentes; si no está en el corpus, lo dice.{" "}
+          <Link href="/evals" className="navlink">
+            ver dashboard de evals →
+          </Link>
         </p>
       </div>
 

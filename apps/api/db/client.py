@@ -83,6 +83,18 @@ def list_documents() -> list[dict]:
     return res.data or []
 
 
+def get_query_logs(limit: int = 200) -> list[dict]:
+    res = (
+        get_client()
+        .table("query_logs")
+        .select("*")
+        .order("created_at", desc=True)
+        .limit(limit)
+        .execute()
+    )
+    return res.data or []
+
+
 def log_query(
     question: str,
     answer: str,
