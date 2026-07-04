@@ -57,6 +57,7 @@ def summary(records: list[EvalRecord]) -> dict:
     hr = retrieval_hit_rate(records)
     gr = groundedness(records)
     ra = refusal_accuracy(records)
+    dar = domain_answer_rate(records)
     return {
         "n_cases": len(records),
         "n_domain": sum(1 for r in records if not r.must_refuse),
@@ -64,9 +65,21 @@ def summary(records: list[EvalRecord]) -> dict:
         "retrieval_hit_rate": hr,
         "groundedness": gr,
         "refusal_accuracy": ra,
+        "domain_answer_rate": dar,
         "_pretty": {
             "retrieval_hit_rate": pct(hr),
             "groundedness": pct(gr),
             "refusal_accuracy": pct(ra),
+            "domain_answer_rate": pct(dar),
         },
     }
+
+
+def domain_answer_rate(records: list[EvalRecord]) -> float | None:
+    """De las preguntas de dominio, ¿en cuántas el sistema respondió (no declinó)?
+    Baja cuando el chunk con la respuesta no entra en el top-k aunque el doc sí:
+    la señal que el experimento de tamaño de chunk busca mejorar."""
+    domain = [r for r in records if not r.must_refuse]
+    if not domain:
+        return None
+    return sum(1 for r in domain if r.answered) / len(domain)
