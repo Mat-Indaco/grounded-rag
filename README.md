@@ -7,7 +7,7 @@ verificables, guardrails contra alucinaciones y una suite de evaluación medible
 No es "chateá con tu PDF": es una demo de que sé *medir y controlar* el comportamiento
 de un LLM. El diferenciador no es el chat, es la carpeta [`/evals`](./evals).
 
-🔗 **Demo:** https://grounded-rag-cyan.vercel.app · 🎥 **Video 60s:** _(pendiente)_
+🔗 **Demo:** https://grounded-rag-cyan.vercel.app · 🎥 **Video 60s:** https://www.youtube.com/shorts/2Apla42p1ik
 
 ## Stack
 
